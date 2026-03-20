@@ -55,6 +55,7 @@ public abstract class Collezione {
                         && gioco.getNumMinGiocatori() >= numMinGiocatori
                         && gioco.getNumMaxGiocatori() <= numMaxGiocatori)
                 .toList();
+        System.out.println("I giochi con il numero di giocatori indicato è: " + listaGiochiPerNumGiocatori.size());
     }
 
     /// /        return collezione.stream().filter(gioco -> gioco.getId() == id ).map(gioco.)

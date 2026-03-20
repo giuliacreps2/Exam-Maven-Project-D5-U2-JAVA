@@ -27,15 +27,29 @@ public abstract class Collezione {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getTitolo() {
         return titolo;
     }
-    
+
     public LocalDate getAnnoPubblicazione() {
         return annoPubblicazione;
     }
 
     public double getPrezzo() {
         return prezzo;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Collezione{" +
+                "id=" + id +
+                ", titolo='" + titolo + '\'' +
+                ", annoPubblicazione=" + annoPubblicazione +
+                ", prezzo=" + prezzo;
     }
 }

@@ -11,8 +11,8 @@ public class GiochiDaTavolo extends Collezione {
     private int numMaxGiocatori;
     private Duration durataPartitaMedia;
 
-    public GiochiDaTavolo(int i, String titolo, LocalDate annoPubblicazione, double prezzo, int numMinGiocatori, int numMaxGiocatori, Duration durataPartitaMedia) {
-        super(0, titolo, annoPubblicazione, prezzo);
+    public GiochiDaTavolo(int i, String titolo, LocalDate annoPubblicazione, double prezzo, TipologiaGioco tipologiaGioco, int numMinGiocatori, int numMaxGiocatori, Duration durataPartitaMedia) {
+        super(0, titolo, annoPubblicazione, prezzo, TipologiaGioco.Gioco_da_Tavolo);
         this.numMinGiocatori = numMinGiocatori;
         this.numMaxGiocatori = numMaxGiocatori;
         this.durataPartitaMedia = durataPartitaMedia;

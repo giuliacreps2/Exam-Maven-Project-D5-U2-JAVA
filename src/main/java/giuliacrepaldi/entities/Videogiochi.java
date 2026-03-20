@@ -8,8 +8,8 @@ public class Videogiochi extends Collezione {
     private Duration durata;
     private GenereVideogiochi genere;
 
-    public Videogiochi(int i, String titolo, LocalDate annoPubblicazione, double prezzo, PiattaformaVideogiochi piattaforma, Duration durata, GenereVideogiochi genere) {
-        super(0, titolo, annoPubblicazione, prezzo);
+    public Videogiochi(int i, String titolo, LocalDate annoPubblicazione, double prezzo, TipologiaGioco tipologiaGioco, PiattaformaVideogiochi piattaforma, Duration durata, GenereVideogiochi genere) {
+        super(0, titolo, annoPubblicazione, prezzo, TipologiaGioco.Videogioco);
         this.piattaforma = piattaforma;
         this.durata = durata;
         this.genere = genere;
@@ -31,6 +31,11 @@ public class Videogiochi extends Collezione {
 
     public GenereVideogiochi getGenere() {
         return genere;
+    }
+
+    @Override
+    public long getId() {
+        return super.getId();
     }
 
     @Override

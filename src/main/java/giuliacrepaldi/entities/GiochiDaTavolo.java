@@ -18,12 +18,6 @@ public class GiochiDaTavolo extends Collezione {
         this.durataPartitaMedia = durataPartitaMedia;
     }
 
-    public GiochiDaTavolo() {
-        this.numMinGiocatori = numMinGiocatori;
-        this.numMaxGiocatori = numMaxGiocatori;
-        this.durataPartitaMedia = durataPartitaMedia;
-    }
-
     public int getNumMinGiocatori() {
         return numMinGiocatori;
     }

@@ -15,12 +15,6 @@ public class Videogiochi extends Collezione {
         this.genere = genere;
     }
 
-    public Videogiochi() {
-        this.piattaforma = piattaforma;
-        this.durata = durata;
-        this.genere = genere;
-    }
-
     public PiattaformaVideogiochi getPiattaforma() {
         return piattaforma;
     }

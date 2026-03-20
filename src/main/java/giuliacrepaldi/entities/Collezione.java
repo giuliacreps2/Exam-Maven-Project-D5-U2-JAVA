@@ -3,6 +3,7 @@ package giuliacrepaldi.entities;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
@@ -34,12 +35,12 @@ public abstract class Collezione {
         return id;
     }
 
-    public long getId(long id) {
-        return id;
-    }
-
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId(long id) {
+        return id;
     }
 
     public String getTitolo() {
@@ -60,14 +61,15 @@ public abstract class Collezione {
 
     //1.metodo per aggiungere un elemento (ma non con lo stesso id)
     //TODO controllare perchè non posso mettere l'indice nell'aggiunta, mancano i controlli per lo stesso ID
-    public Object aggiungiElemento(List<Collezione> collezione, Object elemento){
+    public Object aggiungiElemento(List<Collezione> collezione, Object elemento) {
         return collezione.add((Collezione) elemento);
     }
 
     //2.metodo per ricerca ID
-    //TODO vanno fatti i controlli e va verificata la giusta corrispondenza con il valore dell'id
+    //TODO vanno fatti i controlli se l'id esiste
     public void ricercaId(List<Collezione> collezione, long id) {
-        String titoloId = collezione.forEach(gioco -> gioco.getId() == id);
+        Optional<Collezione> giocoId = collezione.stream().filter(gioco -> gioco.getId() == id).findFirst();
+        System.out.println("Il gioco che stai cercando è: " + giocoId);
     }
 
     //3.metodo per prezzo, deve ritornare quindi una lista di giochi con prezzo inferiore al prezzo inserito
@@ -90,10 +92,16 @@ public abstract class Collezione {
     }
 
     //6.aggiornamento di un elemento esistente dato l'ID
-    //TODO ricontrolla tutto
+    //TODO ricontrolla tutto, fai controlli per l'id uguale
     public List<Collezione> aggiornaID(List<Collezione> collezione, long id, long id2) {
 //        return collezione.stream().filter(gioco -> gioco.getId() == id ).map(gioco.)
-        return collezione.stream().map(gioco -> gioco.getId(id); gioco.setId(id2)).collect(Collectors.toList());
+        return collezione.stream().map(gioco -> {
+            gioco.getId() == id;
+            if (gioco.getId() == id2) {
+            }
+            gioco.setId(id2);
+            return gioco;
+        }).collect(Collectors.toList());
     }
 
     //7.statistiche della collezione: stampa il numero totale di videogiochi e giochi da tavolo presenti, il gioco
@@ -107,8 +115,8 @@ public abstract class Collezione {
         System.out.println("Il numero di giochi da tavola è: " + totaleGiochiDaTavolo);
         //OptionalDouble prezzoMassimo = collezione.stream().mapToDouble(Collezione::getPrezzo).max();
         //System.out.println("Il gioco con il prezzo massimo è: " + prezzoMassimo);
-        List<Collezione> prezzoMassimo = collezione.stream().sorted(Comparator.comparing(Collezione::getPrezzo)).toList();
-        System.out.println("Il gioco con il prezzo massimo è: " + prezzoMassimo.size());
+        Optional prezzoMassimo = collezione.stream().max(Comparator.comparingDouble(Collezione::getPrezzo));
+        System.out.println("Il gioco con il prezzo massimo è: " + prezzoMassimo);
         OptionalDouble mediaPrezziGiochi = collezione.stream().mapToDouble(Collezione::getPrezzo).average();
         System.out.println("Il prezzo medio dei giochi è: " + mediaPrezziGiochi);
     }

@@ -34,6 +34,10 @@ public abstract class Collezione {
         return id;
     }
 
+    public long getId(long id) {
+        return id;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -55,16 +59,29 @@ public abstract class Collezione {
     }
 
     //1.metodo per aggiungere un elemento (ma non con lo stesso id)
+    //TODO controllare perchè non posso mettere l'indice nell'aggiunta, mancano i controlli per lo stesso ID
+    public Object aggiungiElemento(List<Collezione> collezione, Object elemento){
+        return collezione.add((Collezione) elemento);
+    }
+
     //2.metodo per ricerca ID
+    //TODO vanno fatti i controlli e va verificata la giusta corrispondenza con il valore dell'id
+    public void ricercaId(List<Collezione> collezione, long id) {
+        String titoloId = collezione.forEach(gioco -> gioco.getId() == id);
+    }
+
     //3.metodo per prezzo, deve ritornare quindi una lista di giochi con prezzo inferiore al prezzo inserito
-    
+    public void prezzoInferiore(List<Collezione> collezione, double prezzo) {
+        List<Collezione> listaPrezziInferiori = collezione.stream().filter(gioco -> gioco.getPrezzo() < prezzo).toList();
+        System.out.println("Prezzo inferiore " + listaPrezziInferiori.size());
+    }
 
     //4.ricerca per numero di giocatori
-    //problema con numero di giocatori e getId
+    //TODO problema con numero di giocatori e getId
     public void ricercaPerNumGiocatori(List<Collezione> collezione, int numGiocatori) {
         List<Collezione> listaGiochiPerNumGiocatori =
-                collezione.stream().filter(gioco -> gioco.getTipologiaGioco().equals(TipologiaGioco.Gioco_da_Tavolo) && gioco.getId() == numGiocatori).collect(Collectors.toList());
-        System.out.println("La lista di giochi per numero di giocatori è:" + listaGiochiPerNumGiocatori);
+                collezione.stream().filter(gioco -> gioco.getTipologiaGioco().equals(TipologiaGioco.Gioco_da_Tavolo) && gioco.getId() == numGiocatori).toList();
+        System.out.println("La lista di giochi per numero di giocatori è:" + listaGiochiPerNumGiocatori.size());
     }
 
     //5.rimozione di un elemento dato un codice ID
@@ -73,7 +90,11 @@ public abstract class Collezione {
     }
 
     //6.aggiornamento di un elemento esistente dato l'ID
-
+    //TODO ricontrolla tutto
+    public List<Collezione> aggiornaID(List<Collezione> collezione, long id, long id2) {
+//        return collezione.stream().filter(gioco -> gioco.getId() == id ).map(gioco.)
+        return collezione.stream().map(gioco -> gioco.getId(id); gioco.setId(id2)).collect(Collectors.toList());
+    }
 
     //7.statistiche della collezione: stampa il numero totale di videogiochi e giochi da tavolo presenti, il gioco
     //con il prezzo più alto e la medie dei prezzi di tutti gli elementi.
@@ -87,7 +108,7 @@ public abstract class Collezione {
         //OptionalDouble prezzoMassimo = collezione.stream().mapToDouble(Collezione::getPrezzo).max();
         //System.out.println("Il gioco con il prezzo massimo è: " + prezzoMassimo);
         List<Collezione> prezzoMassimo = collezione.stream().sorted(Comparator.comparing(Collezione::getPrezzo)).toList();
-        System.out.println("Il gioco con il prezzo massimo è: " + prezzoMassimo);
+        System.out.println("Il gioco con il prezzo massimo è: " + prezzoMassimo.size());
         OptionalDouble mediaPrezziGiochi = collezione.stream().mapToDouble(Collezione::getPrezzo).average();
         System.out.println("Il prezzo medio dei giochi è: " + mediaPrezziGiochi);
     }
